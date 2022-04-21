@@ -3,47 +3,47 @@ package section4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 public class exam5 {
-    public static int solution(char[] charArr, String str){
-        int ans = 0;
-        HashMap<Character, Integer> hashMap = new HashMap<>();
-        HashMap<Character, Integer> tarMap = new HashMap<>();
-        int len = str.length()-1;
+    public static int solution(int N, int K, int[] arr){
 
-        for(char c : str.toCharArray()){
-            tarMap.put(c, tarMap.getOrDefault(c, 0)+1);
-        }
+        TreeSet<Integer> set = new TreeSet<>(Collections.reverseOrder());
 
-        for(int i=0; i<len; i++){
-            hashMap.put(charArr[i],hashMap.getOrDefault(charArr[i],0)+1);
-        }
-
-        int lt=0;
-        for(int rt=len; rt<charArr.length; rt++){
-            hashMap.put(charArr[rt],hashMap.getOrDefault(charArr[rt],0)+1);
-            //비교
-            if(hashMap.equals(tarMap)) ans++;
-            if(hashMap.get(charArr[lt])==1){
-                hashMap.remove(charArr[lt]);
-            } else{
-                hashMap.put(charArr[lt],hashMap.get(charArr[lt])-1);
+        for(int i=0; i<N; i++){
+            for(int j=i+1; j<N; j++){
+                for(int k=j+1; k<N; k++){
+                    set.add(arr[i]+arr[j]+arr[k]);
+                }
             }
-
-            lt++;
         }
 
+        int cnt = 0;
+        for(int i : set){
+            cnt++;
+            if(cnt==K) return i;
+        }
 
-        return ans;
+        return -1;
+
+
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
 
-        String input = br.readLine();
-        String str = br.readLine();
+        st = new StringTokenizer(br.readLine()," ");
+        int[] inputs = new int[N];
+        for(int i=0; i<N; i++){
+            inputs[i] = Integer.parseInt(st.nextToken());
+        }
 
-        System.out.println(solution(input.toCharArray(), str));
+        System.out.println(solution(N, K, inputs));
 
     }
 }
