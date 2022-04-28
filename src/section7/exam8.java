@@ -8,13 +8,12 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class exam8 {
-    static int ans = 0;
     static int[] move = {1, -1, 5};
     static int[] chk;
 
     public static int BFS(int S, int E){
         Queue<Integer> queue = new LinkedList<>();
-        chk = new int[1001];
+        chk = new int[10001];
         chk[S]=1;
         int L = 0;
         queue.offer(S);
@@ -24,7 +23,7 @@ public class exam8 {
                 int cur = queue.poll();
                 for(int d=0; d<3; d++){
                     int nx = cur+move[d];
-                    if(cur==E) return L+1;
+                    if(nx==E) return L+1;
                     if(nx>=1 && nx<=10001 && chk[nx]==0){
                         chk[nx]=1;
                         queue.offer(nx);
