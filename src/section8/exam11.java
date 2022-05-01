@@ -15,27 +15,19 @@ public class exam11 {
     public static void solution(int i, int j){
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[] {i,j});
-        int L = 0;
         while(!queue.isEmpty()){
-            int len = queue.size();
-            for(int q=0; q<len; q++){
-                int[] cur = queue.poll();
-                int curI = cur[0];
-                int curJ = cur[1];
-                map[curI][curJ] = L;
+            int[] cur = queue.poll();
 
-                for(int d=0; d<4; d++){
-                    int newI = curI + di[d];
-                    int newJ = curJ + dj[d];
+            for(int d=0; d<4; d++){
+                int newI = cur[0] + di[d];
+                int newJ = cur[1] + dj[d];
 
-                    if(newI>=0 && newI<=6 && newJ>=0 && newJ<=6 && map[newI][newJ]==0){
-                        queue.offer(new int[] {newI,newJ});
-                        map[newI][newJ] = L+1;
-                    }
-                }
+                if(newI>=0&&newI<7&&newJ>=0&&newJ<7&&map[newI][newJ]==0){
+                    map[newI][newJ]=map[cur[0]][cur[1]]+1;
+                    queue.offer(new int[] {newI,newJ}) ;                }
             }
-            L++;
         }
+
     }
 
     public static void main(String[] args) throws IOException {

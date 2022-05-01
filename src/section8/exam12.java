@@ -9,24 +9,22 @@ import java.util.StringTokenizer;
 
 public class exam12 {
     static int[][] map;
-    static int[] dy = {1,0,-1,0};
-    static int[] dx = {0,1,0,-1};
+    static int[] di = {1,0,-1,0};
+    static int[] dj = {0,1,0,-1};
     static int N,M;
     static Queue<int[]> queue = new LinkedList<>();
 
     public static void solution(){
         while(!queue.isEmpty()){
             int[] cur = queue.poll();
-            int curY = cur[0];
-            int curX = cur[1];
 
             for(int d=0; d<4; d++){
-                int newY = curY + dy[d];
-                int newX = curX + dx[d];
+                int newI = cur[0] + di[d];
+                int newJ = cur[1] + dj[d];
 
-                if(newY>=0 && newY<M && newX>=0 && newX<N && map[newY][newX]==0){
-                    map[newY][newX] = map[curY][curX]+1;
-                    queue.offer(new int[] {newY,newX});
+                if(newI>=0&&newI<N&&newJ>=0&&newJ<M&&map[newI][newJ]==0){
+                    queue.offer(new int[] {newI,newJ});
+                    map[newI][newJ] = map[cur[0]][cur[1]]+1;
                 }
             }
         }
@@ -35,19 +33,19 @@ public class exam12 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine()," ");
-        N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
 
-        map = new int[M][N];
+        map = new int[N][M];
 
-        for(int y=0; y<M; y++){
+        for(int i=0; i<N; i++){
             st = new StringTokenizer(br.readLine()," ");
-            for(int x=0; x<N; x++){
+            for(int j=0; j<M; j++){
                 int input = Integer.parseInt(st.nextToken());
                 if(input==1){
-                    queue.offer(new int[] {y,x});
+                    queue.offer(new int[] {i,j});
                 }
-                map[y][x] = input;
+                map[i][j] = input;
             }
         }
 
@@ -55,15 +53,19 @@ public class exam12 {
 
         boolean flag = true;
         int ans = -1;
-        for(int y=0; y<M; y++){
-            for(int x=0; x<N; x++){
-                if(map[y][x]==0) flag=false;
-                ans = Math.max(ans,map[y][x]);
+        for(int i=0; i<N; i++){
+            for(int j=0; j<M; j++){
+                if(map[i][j]==0) {
+                    flag = false;
+                    break;
+                } else{
+                    ans = Math.max(ans, map[i][j]);
+                }
             }
             if(!flag) break;
         }
+        System.out.println(flag?ans-1:-1);
 
-        System.out.println(flag ? ans-1 : -1);
 
     }
 }

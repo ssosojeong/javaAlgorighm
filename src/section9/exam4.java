@@ -28,16 +28,17 @@ public class exam4 {
 
     public static int solution(ArrayList<Lecture> arr){
         int ans = 0;
-
         PriorityQueue<Integer> pQueue = new PriorityQueue<>(Collections.reverseOrder());
         Collections.sort(arr);
         int j=0;
-        for(int i=max; i>=1; i--){
+        for(int d=max; d>0; d--){
             for(; j<N; j++){
-                if(arr.get(j).date<i) break;
+                if(arr.get(j).date<d){
+                    break;
+                }
                 pQueue.offer(arr.get(j).money);
             }
-            if(!pQueue.isEmpty()) ans+=pQueue.poll();
+            if(!pQueue.isEmpty()) ans += pQueue.poll();
         }
 
         return ans;
@@ -59,9 +60,6 @@ public class exam4 {
             max = Math.max(max,date);
             arr.add(new Lecture(money, date));
         }
-
-        Collections.sort(arr);
-
 
         System.out.println(solution(arr));
 

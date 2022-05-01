@@ -24,9 +24,10 @@ class Meeting implements Comparable<Meeting> {
 
 public class exam2 {
 
-    public static int solution(Meeting[] meeting, int N){
+    public static int solution(Meeting[] meeting){
         int cnt = 0;
-        int et = 0;
+        int et = -1;
+
         for(Meeting m : meeting){
             if(m.start>=et){
                 et = m.end;
@@ -48,7 +49,7 @@ public class exam2 {
 
         Arrays.sort(meeting);
 
-        System.out.println(solution(meeting,N));
+        System.out.println(solution(meeting));
 
     }
 }

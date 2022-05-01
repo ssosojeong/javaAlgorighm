@@ -13,21 +13,19 @@ public class exam14 {
 
     public static void DFS(int L, int start){
         if(L==M){
-            //조합이 다 구해진 경우 피자거리를 계산
             int sum = 0;
-            for(int[] h : house){
+            for(int[] h:house){
                 int dis = Integer.MAX_VALUE;
-                for(int i:combi){
-                    int[] tar = pizza.get(i);
-                    dis = Math.min(dis, Math.abs(h[0]-tar[0])+Math.abs(h[1]-tar[1]));
+                for(int i: combi){
+                    int[] p = pizza.get(i);
+                    dis = Math.min(dis, Math.abs(h[0]-p[0])+Math.abs(h[1]-p[1]));
                 }
-                sum += dis;
+                sum+=dis;
             }
             ans = Math.min(ans,sum);
-        }
-        else{
-            for(int i=start; i<pizza.size(); i++){
-                combi[L]=i;
+        } else{
+            for(int i = start; i<pizza.size(); i++){
+                combi[L] = i;
                 DFS(L+1, i+1);
             }
         }

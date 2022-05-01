@@ -26,17 +26,13 @@ class Schedule implements Comparable<Schedule>{
 public class exam3 {
     public static int solution(ArrayList<Schedule> arr){
         Collections.sort(arr);
-
         int cnt = 0;
-        int ans = -1;
+        int ans = 0;
 
         for(Schedule s : arr){
-            if(s.state=='e'){
-                cnt--;
-            } else{
-                cnt++;
-            }
-            ans = Math.max(cnt,ans);
+            if(s.state == 'e') cnt--;
+            else cnt++;
+            ans = Math.max(ans, cnt);
         }
 
         return ans;

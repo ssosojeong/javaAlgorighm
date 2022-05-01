@@ -18,7 +18,7 @@ public class exam13 {
             int newI = i+di[d];
             int newJ = j+dj[d];
 
-            if(newI>=0 && newI<N && newJ>=0 && newJ<N && map[newI][newJ]==1){
+            if(newI>=0&&newI<N&&newJ>=0&&newJ<N&&map[newI][newJ]==1){
                 map[newI][newJ]=0;
                 DFS(newI,newJ);
             }
@@ -26,12 +26,12 @@ public class exam13 {
     }
 
     public static void solution(int[][] map){
-        for(int i=0;i<N;i++){
-            for(int j=0; j<N;j++){
+        for(int i=0; i<N; i++){
+            for(int j=0; j<N; j++){
                 if(map[i][j]==1){
-                    ans++;
                     map[i][j]=0;
                     DFS(i,j);
+                    ans++;
                 }
             }
         }
