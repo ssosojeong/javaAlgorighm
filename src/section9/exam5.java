@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -31,14 +32,12 @@ public class exam5 {
         pQueue.offer(new Edge(v,0));
         dis[v] = 0;
         while(!pQueue.isEmpty()){
-            Edge tmp = pQueue.poll();
-            int nowV = tmp.vex;
-            int nowC = tmp.cost;
-            if(nowC>dis[nowV]) continue;
-            for(Edge e : graph.get(nowV)){
-                if(dis[e.vex]>nowC+e.cost){
-                    dis[e.vex] = nowC+e.cost;
-                    pQueue.offer(new Edge(e.vex,nowC+e.cost));
+            Edge now = pQueue.poll();
+            if(now.cost>dis[now.vex]) continue;
+            for(Edge e : graph.get(now.vex)){
+                if(dis[e.vex]>now.cost+e.cost){
+                    dis[e.vex] = now.cost+e.cost;
+                    pQueue.offer(new Edge(e.vex,now.cost+e.cost));
                 }
             }
         }
@@ -56,6 +55,7 @@ public class exam5 {
             graph.add(new ArrayList<>());
         }
         dis = new int[N+1];
+        Arrays.fill(dis, Integer.MAX_VALUE);
 
         for(int i=0; i<M; i++){
             st = new StringTokenizer(br.readLine()," ");
@@ -65,6 +65,10 @@ public class exam5 {
             graph.get(a).add(new Edge(b,c));
         }
         solution(1);
+        for(int i=2; i<=N; i++){
+            if(dis[i]!=Integer.MAX_VALUE) System.out.println(i+" : " +dis[i]);
+            else System.out.println(i + " : impossible");
+        }
 
     }
 }

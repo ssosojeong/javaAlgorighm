@@ -12,7 +12,7 @@ public class exam1 {
 
         int p1=0, p2=0;
         while(p1<N && p2<M){
-            if(arr1[p1]<arr2[p2]){
+            if(arr1[p1]<arr2[p2]) {
                 ans.add(arr1[p1++]);
             } else{
                 ans.add(arr2[p2++]);
@@ -24,6 +24,7 @@ public class exam1 {
         while(p2<M){
             ans.add(arr2[p2++]);
         }
+
 
         return ans;
     }
